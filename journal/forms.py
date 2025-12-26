@@ -18,7 +18,23 @@ class TradeForm(forms.ModelForm):
     
     def __init__(self, user, *args, **kwargs):
         super(TradeForm, self).__init__(*args, **kwargs)
-        self.fields['strategy'].queryset = Strategy.objects.filter(user=user)
+        strategies = Strategy.objects.filter(user=user)
+        self.fields['strategy'].queryset = strategies
+        
+        # If no strategies exist, create default ones
+        if not strategies.exists():
+            default_strategies = [
+                {'name': 'Swing Trading', 'description': 'Medium-term trading strategy'},
+                {'name': 'Day Trading', 'description': 'Short-term intraday trading'},
+                {'name': 'Scalping', 'description': 'Very short-term trading'},
+                {'name': 'Position Trading', 'description': 'Long-term trading strategy'},
+            ]
+            
+            for strategy_data in default_strategies:
+                Strategy.objects.create(user=user, **strategy_data)
+            
+            # Refresh queryset
+            self.fields['strategy'].queryset = Strategy.objects.filter(user=user)
 
 class TradeImageForm(forms.ModelForm):
     class Meta:

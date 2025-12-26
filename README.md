@@ -2,7 +2,7 @@
 
 A comprehensive trading journal and portfolio management platform designed specifically for Nepali traders. Track your trades, analyze performance, manage your portfolio, and learn from educational content - all in one place.
 
-## 🚀 Features
+## Features
 
 - **Trade Journaling**: Log trades with detailed entry/exit points, emotions, and strategies
 - **Portfolio Management**: Track your complete portfolio with real-time position monitoring
@@ -13,7 +13,7 @@ A comprehensive trading journal and portfolio management platform designed speci
 - **Export Functionality**: Export trades and generate PDF reports
 - **Responsive Design**: Modern UI that works on all devices
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Backend**: Django 5.1+ (Python Web Framework)
 - **Database**: SQLite (Development) / PostgreSQL (Production)
@@ -22,20 +22,20 @@ A comprehensive trading journal and portfolio management platform designed speci
 - **PDF Generation**: ReportLab
 - **Static Files**: WhiteNoise (Production)
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Python 3.8 or higher
 - pip (Python package installer)
 - Git
 
-## 🔧 Installation & Setup
+## Installation & Setup
 
 ### Windows Setup
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd sujit
+   git clone https://github.com/SunilNeupane77/NepseJournal.git
+   cd NepseJournal
    ```
 
 2. **Create virtual environment**
@@ -73,7 +73,7 @@ A comprehensive trading journal and portfolio management platform designed speci
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/SunilNeupane77/NepseJournal.git
    cd NepseJournal
    ```
 
@@ -108,15 +108,15 @@ A comprehensive trading journal and portfolio management platform designed speci
    python manage.py runserver
    ```
 
-## 🌐 Access the Application
+## Access the Application
 
 - **Main Application**: http://127.0.0.1:8000/
 - **Admin Panel**: http://127.0.0.1:8000/admin/
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-sujit/
+NepseJournal/
 ├── accounts/           # User authentication and profiles
 ├── core/              # Main app with home, dashboard, admin features
 ├── journal/           # Trade journaling functionality
@@ -131,7 +131,7 @@ sujit/
 └── db.sqlite3       # SQLite database (development)
 ```
 
-## 🔑 Key Applications
+## Key Applications
 
 ### Core App
 - Home page and landing
@@ -162,7 +162,7 @@ sujit/
 - Lesson content
 - Educational resources
 
-## 🎨 UI Components
+## UI Components
 
 - **Modern Design**: Glass morphism effects and gradients
 - **Responsive Layout**: Bootstrap 5 grid system
@@ -170,7 +170,7 @@ sujit/
 - **Animations**: Smooth fade-in effects
 - **Icons**: Bootstrap Icons integration
 
-## 🔒 Security Features
+## Security Features
 
 - CSRF protection
 - User authentication
@@ -178,7 +178,7 @@ sujit/
 - Session management
 - XFrame protection
 
-## 📊 Database Models
+## Database Models
 
 ### User Model (Custom)
 - Extended Django user with additional fields
@@ -197,7 +197,7 @@ sujit/
 - Educational content structure
 - Progress tracking
 
-## 🚀 Deployment
+## Deployment
 
 ### Environment Variables
 Create a `.env` file for production:
@@ -214,7 +214,7 @@ DATABASE_URL=your-database-url
 - Set up proper logging
 - Enable security middleware
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
@@ -222,18 +222,18 @@ DATABASE_URL=your-database-url
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🆘 Support
+## Support
 
 For support and questions:
 - Create an issue in the repository
 - Contact the development team
 - Check the documentation
 
-## 🔄 Version History
+## Version History
 
 - **v1.0.0** - Initial release with core functionality
 - Trade journaling, portfolio management, user authentication
@@ -242,4 +242,4 @@ For support and questions:
 
 ---
 
-# NepseJournal
+**Made for Nepali Traders**

@@ -63,13 +63,11 @@
                             </div>
                             <div class="col-6">
                                 <p class="text-muted small mb-1">Stop Loss</p>
-                                <p class="fw-bold mb-0">{% if trade.stop_loss %}Rs. {{ trade.stop_loss }}{% else %}-{%
-                                    endif %}</p>
+                                <p class="fw-bold mb-0">{% if trade.stop_loss %}Rs. {{ trade.stop_loss }}{% else %}-{% endif %}</p>
                             </div>
                             <div class="col-6">
                                 <p class="text-muted small mb-1">Target</p>
-                                <p class="fw-bold mb-0">{% if trade.target %}Rs. {{ trade.target }}{% else %}-{% endif
-                                    %}</p>
+                                <p class="fw-bold mb-0">{% if trade.target %}Rs. {{ trade.target }}{% else %}-{% endif %}</p>
                             </div>
                         </div>
                     </div>
@@ -81,13 +79,11 @@
                         <div class="row g-3">
                             <div class="col-6">
                                 <p class="text-muted small mb-1">Exit Price</p>
-                                <p class="fw-bold mb-0">{% if trade.exit_price %}Rs. {{ trade.exit_price }}{% else %}-{%
-                                    endif %}</p>
+                                <p class="fw-bold mb-0">{% if trade.exit_price %}Rs. {{ trade.exit_price }}{% else %}-{% endif %}</p>
                             </div>
                             <div class="col-6">
                                 <p class="text-muted small mb-1">Exit Date</p>
-                                <p class="fw-bold mb-0">{% if trade.exit_date %}{{ trade.exit_date|date:"M d, Y" }}{%
-                                    else %}-{% endif %}</p>
+                                <p class="fw-bold mb-0">{% if trade.exit_date %}{{ trade.exit_date|date:"M d, Y" }}{% else %}-{% endif %}</p>
                             </div>
                             <div class="col-6">
                                 <p class="text-muted small mb-1">Strategy</p>

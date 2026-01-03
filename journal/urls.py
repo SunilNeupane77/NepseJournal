@@ -10,4 +10,7 @@ urlpatterns = [
     
     path('strategies/', views.strategy_list, name='strategy_list'),
     path('strategies/add/', views.strategy_create, name='strategy_create'),
+
+    # URL for generating the PDF report
+    path('report/', views.generate_trade_report, name='generate_trade_report'),
 ]

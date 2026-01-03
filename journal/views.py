@@ -3,6 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Trade, TradeImage, Strategy
 from .forms import TradeForm, TradeImageForm, StrategyForm
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+from decimal import Decimal
 
 @login_required
 def trade_list(request):
@@ -68,3 +73,67 @@ def strategy_create(request):
     else:
         form = StrategyForm()
     return render(request, 'journal/strategy_form.html', {'form': form, 'title': 'Create New Strategy'})
+
+
+@login_required
+def generate_trade_report(request):
+    """
+    Generates a PDF report of the user's trading performance.
+    """
+    # Fetch closed trades for the user
+    closed_trades = Trade.objects.filter(user=request.user, status='CLOSED').order_by('exit_date')
+
+    pnl_values = [t.pnl for t in closed_trades if t.pnl is not None]
+
+    total_trades = len(pnl_values)
+    wins = [pnl for pnl in pnl_values if pnl > 0]
+    losses = [pnl for pnl in pnl_values if pnl <= 0]
+
+    winning_trades = len(wins)
+    losing_trades = len(losses)
+
+    win_rate = (winning_trades / total_trades * 100) if total_trades > 0 else 0
+
+    total_pnl = sum(pnl_values) if pnl_values else Decimal('0.00')
+
+    average_win = sum(wins) / len(wins) if wins else Decimal('0.00')
+    average_loss = sum(losses) / len(losses) if losses else Decimal('0.00')
+    
+    largest_win = max(wins) if wins else Decimal('0.00')
+    largest_loss = min(losses) if losses else Decimal('0.00')
+
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="trade_performance_report.pdf"'
+
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response, pagesize=letter)
+    width, height = letter
+
+    # Draw things on the PDF.
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(1 * inch, height - 1 * inch, f"Trade Performance Report for {request.user.username}")
+
+    p.setFont("Helvetica", 12)
+    y_position = height - 1.5 * inch
+
+    def draw_metric(label, value, y_pos):
+        p.drawString(1 * inch, y_pos, f"{label}:")
+        p.drawString(3.5 * inch, y_pos, str(value))
+        return y_pos - 0.3 * inch
+
+    y_position = draw_metric("Total Closed Trades", total_trades, y_position)
+    y_position = draw_metric("Winning Trades", winning_trades, y_position)
+    y_position = draw_metric("Losing Trades", losing_trades, y_position)
+    y_position = draw_metric("Win Rate", f"{win_rate:.2f}%", y_position)
+    y_position = draw_metric("Total P&L", f"{total_pnl:.2f}", y_position)
+    y_position = draw_metric("Average Win", f"{average_win:.2f}", y_position)
+    y_position = draw_metric("Average Loss", f"{average_loss:.2f}", y_position)
+    y_position = draw_metric("Largest Win", f"{largest_win:.2f}", y_position)
+    y_position = draw_metric("Largest Loss", f"{largest_loss:.2f}", y_position)
+
+    # Close the PDF object cleanly.
+    p.showPage()
+    p.save()
+
+    return response
